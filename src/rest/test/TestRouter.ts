@@ -1,6 +1,6 @@
 import {Router} from "express";
-import {TestService} from "../services/TestService";
-import {TestController} from "../controllers/TestController";
+import {TestService} from "../../domain/test/TestService";
+import {TestController} from "./TestController";
 
 const testRouter = Router();
 const testService = new TestService()

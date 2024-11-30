@@ -1,4 +1,4 @@
-import {TestService} from "../services/TestService";
+import {TestService} from "../../domain/test/TestService";
 import {Response, Request} from 'express'
 
 export class TestController {

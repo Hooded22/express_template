@@ -1,3 +1,4 @@
 export const ApiPaths = {
-    Test: "/test"
+    Test: "/test",
+    Users: "/users"
 } as const;
