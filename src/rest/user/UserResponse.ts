@@ -1,11 +1,5 @@
-import {User} from "@prisma/client";
-
-export class UserResponse {
+export interface UserResponse {
     id: number;
     username: string;
-
-    constructor(user: User) {
-        this.id = user.id;
-        this.username = user.username;
-    }
+    email: string;
 }
