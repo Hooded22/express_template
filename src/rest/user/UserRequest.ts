@@ -1,7 +1,6 @@
-export class UserRequest {
+export interface UserRequest {
     username: string;
-
-    constructor(username: string) {
-        this.username = username;
-    }
+    email: string;
+    password: string;
+    repeatPassword: string;
 }

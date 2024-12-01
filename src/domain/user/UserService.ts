@@ -1,6 +1,7 @@
 import {UserRepository} from "./UserRepository";
 import {User} from "@prisma/client";
 import {UserExistsException} from "../exception/UserAlreadyExistException";
+import {UserRequest} from "../../rest/user/UserRequest";
 
 export class UserService {
     private userRepository: UserRepository;
@@ -13,13 +14,14 @@ export class UserService {
         return this.userRepository.findAll();
     }
 
-     addUser = async (username: User['username']):Promise<User> => {
-        const existingUser = await this.userRepository.findByUsername(username);
+     addUser = async (userData: UserRequest):Promise<User> => {
+        const existingUserByUsername = await this.userRepository.findByUsername(userData.username);
+        const existingUserByEmail = await this.userRepository.findByEmail(userData.email);
 
-        if(existingUser) {
+        if(existingUserByUsername || existingUserByEmail) {
             throw new UserExistsException();
         }
 
-        return this.userRepository.createUser(username);
+        return this.userRepository.createUser(userData);
      }
 }

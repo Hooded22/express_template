@@ -1,4 +1,5 @@
 import {PrismaClient, User} from "@prisma/client";
+import {UserRequest} from "../../rest/user/UserRequest";
 
 export class UserRepository {
     private prisma: PrismaClient;
@@ -19,10 +20,12 @@ export class UserRepository {
         });
     };
 
-    createUser = async (username: string): Promise<User> => {
+    createUser = async (userData: UserRequest): Promise<User> => {
         return this.prisma.user.create({
             data: {
-                username,
+                username: userData.username,
+                email: userData.email,
+                password: userData.password
             },
         });
     };
@@ -39,6 +42,14 @@ export class UserRepository {
         return this.prisma.user.findUnique({
             where: {
                 username: username,
+            },
+        });
+    };
+
+    findByEmail = async (email: string): Promise<User | null> => {
+        return this.prisma.user.findUnique({
+            where: {
+                email,
             },
         });
     };

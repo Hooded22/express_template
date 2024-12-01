@@ -1,6 +1,4 @@
 import {UserService} from "../../domain/user/UserService";
-import {UserRequest} from "./UserRequest";
-import {UserResponse} from "./UserResponse";
 import {Request, Response} from 'express'
 import {UserMapper} from "../../domain/user/UserMapper";
 import {UserExistsException} from "../../domain/exception/UserAlreadyExistException";
@@ -28,8 +26,8 @@ export class UserController {
     addUser = async (req: Request, res: Response) => {
         try {
             const userMapper = new UserMapper();
-            const userRequest = new UserRequest(req.body.username);
-            const newUser = await this.userService.addUser(userRequest.username);
+            const userRequest = userMapper.toCreateRequest(req.body);
+            const newUser = await this.userService.addUser(userRequest);
             const userResponse = userMapper.toResponse(newUser);
 
 
@@ -37,6 +35,7 @@ export class UserController {
         } catch (error) {
             if(error instanceof UserExistsException) {
                 res.status(400).json({ error: error.message });
+                return;
             }
 
             res.status(500).json({ error: errorMessages.SERVER_ERROR });

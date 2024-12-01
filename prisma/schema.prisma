@@ -14,22 +14,17 @@ datasource db {
 }
 
 model User {
-  id       Int      @id @default(autoincrement())
-  username String   @unique
-  Access   Access[]
+  id       Int       @id @default(autoincrement())
+  username String    @unique
+  email    String    @unique
+  password String
+  Profile  Profile[]
 }
 
-model Access {
-  id        Int      @id @default(autoincrement())
-  user      User     @relation(fields: [userId], references: [id])
-  userId    Int
-  deptId    String
-  status    Status   @default(PENDING)
-  createdAt DateTime @default(now())
-}
-
-enum Status {
-  INACTIVE
-  ACTIVE
-  PENDING
+model Profile {
+  id      Int     @id @default(autoincrement())
+  user    User    @relation(fields: [userId], references: [id])
+  userId  Int
+  bio     String?
+  picture String?
 }
