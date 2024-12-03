@@ -6,6 +6,7 @@ export const errorMessages = {
   EMAIL_INVALID: "Valid email is required",
   PASSWORD_LENGTH: "Password must be at least 8 characters long",
   PASSWORDS_MISMATCH: "Passwords do not match",
+  USER_ID_PARAM: "User Id is required",
   PROFILE: {
     USER_ID_REQUIRED: "User id is required",
     USER_ID_NUMERIC: "User id has to be a number",

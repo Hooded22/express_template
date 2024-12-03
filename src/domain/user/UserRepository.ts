@@ -1,4 +1,4 @@
-import { PrismaClient, User } from "@prisma/client";
+import { PrismaClient, Profile, User } from "@prisma/client";
 import { UserRequest } from "../../rest/user/UserRequest";
 
 export class UserRepository {
@@ -53,4 +53,10 @@ export class UserRepository {
       },
     });
   };
+
+  async findUserProfiles(userId: number): Promise<Profile[]> {
+    return this.prisma.profile.findMany({
+      where: { userId: userId },
+    });
+  }
 }

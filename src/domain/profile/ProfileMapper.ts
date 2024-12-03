@@ -1,8 +1,10 @@
-import { ProfileResponse } from "../../rest/profile/ProfileResponse";
+import { ProfileWithUserResponse } from "../../rest/profile/ProfileWithUserResponse";
 import { ProfileWithUser } from "./ProfileWithUser";
 import { Request } from "express";
 import { ProfileRequest } from "../../rest/profile/ProfileRequest";
 import { UserMapper } from "../user/UserMapper";
+import { Profile } from "@prisma/client";
+import { ProfileResponse } from "../../rest/profile/ProfileResponse";
 
 export class ProfileMapper {
   private userMapper: UserMapper;
@@ -11,7 +13,9 @@ export class ProfileMapper {
     this.userMapper = new UserMapper();
   }
 
-  toResponse = (profile: ProfileWithUser): ProfileResponse => {
+  toProfileWithUserResponse = (
+    profile: ProfileWithUser,
+  ): ProfileWithUserResponse => {
     return {
       bio: profile.bio || undefined,
       picture: profile.picture || undefined,
@@ -20,7 +24,21 @@ export class ProfileMapper {
     };
   };
 
-  toResponseArray = (profiles: ProfileWithUser[]): ProfileResponse[] => {
+  toResponse = (profile: Profile): ProfileResponse => {
+    return {
+      bio: profile.bio || undefined,
+      picture: profile.picture || undefined,
+      id: profile.id,
+    };
+  };
+
+  toProfileWithUserResponseArray = (
+    profiles: ProfileWithUser[],
+  ): ProfileWithUserResponse[] => {
+    return profiles.map((profile) => this.toProfileWithUserResponse(profile));
+  };
+
+  toResponseArray = (profiles: Profile[]): ProfileResponse[] => {
     return profiles.map((profile) => this.toResponse(profile));
   };
 

@@ -1,4 +1,4 @@
-import { body, validationResult } from "express-validator";
+import { body, param, validationResult } from "express-validator";
 import { Request, Response, NextFunction } from "express";
 import { errorMessages } from "../../config/errorMessages";
 
@@ -19,4 +19,8 @@ export const validateUserRequest = [
     }
     next();
   },
+];
+
+export const validateUserIdParam = [
+  param("id").isInt().withMessage(errorMessages.USER_ID_PARAM),
 ];

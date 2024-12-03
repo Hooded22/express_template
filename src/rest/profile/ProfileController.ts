@@ -18,7 +18,7 @@ export class ProfileController {
     try {
       const allProfiles = await this.profileService.getAllProfiles();
       const allProfilesResponse =
-        this.profileMapper.toResponseArray(allProfiles);
+        this.profileMapper.toProfileWithUserResponseArray(allProfiles);
 
       res.status(200).json(allProfilesResponse);
     } catch (error: unknown) {
@@ -31,7 +31,8 @@ export class ProfileController {
       const profileRequest = this.profileMapper.toCreateRequest(req.body);
 
       const newProfile = await this.profileService.addProfile(profileRequest);
-      const newProfileResponse = this.profileMapper.toResponse(newProfile);
+      const newProfileResponse =
+        this.profileMapper.toProfileWithUserResponse(newProfile);
 
       res.status(200).json(newProfileResponse);
     } catch (error: unknown) {
