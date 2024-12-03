@@ -1,8 +1,7 @@
 export class TestService {
-    constructor() {
-    }
+  constructor() {}
 
-    public getWelcomeMessage() {
-        return "Hello Adventurer!"
-    }
+  public getWelcomeMessage() {
+    return "Hello Adventurer!";
+  }
 }

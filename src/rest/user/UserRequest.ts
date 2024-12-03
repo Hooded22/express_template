@@ -1,6 +1,6 @@
 export interface UserRequest {
-    username: string;
-    email: string;
-    password: string;
-    repeatPassword: string;
+  username: string;
+  email: string;
+  password: string;
+  repeatPassword: string;
 }
