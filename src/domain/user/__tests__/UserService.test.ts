@@ -13,7 +13,6 @@ describe("UserService", () => {
   let userService: UserService;
 
   beforeEach(() => {
-    // Creating a manual mock of UserRepository
     userRepository = new MockedUserRepository();
     userService = new UserService(userRepository);
   });
