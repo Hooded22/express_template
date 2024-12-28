@@ -1,6 +1,5 @@
 import { ProfileRepository } from "./ProfileRepository";
 import { UserRepository } from "../user/UserRepository";
-import { Profile } from "@prisma/client";
 import { ProfileRequest } from "../../rest/profile/ProfileRequest";
 import { UserNotFoundException } from "../exception/UserNotFoundException";
 import { ProfileWithUser } from "./ProfileWithUser";
@@ -24,7 +23,7 @@ export class ProfileService {
   addProfile = async (
     profileData: ProfileRequest,
   ): Promise<ProfileWithUser> => {
-    const existingUser = this.userRepository.findById(profileData.userId);
+    const existingUser = await this.userRepository.findById(profileData.userId);
 
     if (!existingUser) {
       throw new UserNotFoundException();
