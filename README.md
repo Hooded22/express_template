@@ -24,6 +24,31 @@ This is a robust, versatile starter template designed to accelerate the developm
 
 ## Run Instructions
 
+### Option 1: Docker Setup (Recommended)
+
+1. **Prerequisites**:
+   - Docker
+   - Colima (for MacOS users without Docker Desktop)
+
+2. **Start Docker Daemon (MacOS with Colima)**:
+   ```bash
+   brew install colima docker docker-compose
+   colima start
+   ```
+   Add to your shell config (~/.zshrc or ~/.bash_profile):
+   ```bash
+   export DOCKER_HOST="unix://${HOME}/.colima/docker.sock"
+   ```
+
+3. **Build and Run**:
+   ```bash
+   docker-compose up --build
+   ```
+
+The application will be available at http://localhost:3000.
+
+### Option 2: Traditional Setup
+
 1. **Clone the Repository**:
    ```bash
    git clone <repository_url>
@@ -43,7 +68,6 @@ This is a robust, versatile starter template designed to accelerate the developm
    ```
 
 4. **Run MySQL in Docker**:
-   Execute the following command to run a MySQL database in a Docker container:
    ```bash
    docker run --name my-mysql-express-app -e MYSQL_ROOT_PASSWORD=express_app -e MYSQL_DATABASE=express_app_db -e MYSQL_PASSWORD=express_app -p 3307:3306 -d mysql:8.0
    ```
